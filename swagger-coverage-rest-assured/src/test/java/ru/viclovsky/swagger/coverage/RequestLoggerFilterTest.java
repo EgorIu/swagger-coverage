@@ -17,7 +17,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 
 public class RequestLoggerFilterTest {
 
-    private static final String BODY_STRING = "Hello world!";
+    private static final String BODY_STRING = "{\"value\": \"Hello world!\"}";
 
     @Rule
     public WireMockRule mock = new WireMockRule(options().dynamicPort());

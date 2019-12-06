@@ -54,7 +54,11 @@ public class SwaggerCoverageRestAssured implements OrderedFilter {
 
         final Response response = ctx.next(requestSpec, responseSpec);
 
-        operation.addResponse(valueOf(response.statusCode()), new io.swagger.models.Response());
+        io.swagger.models.Response responseExample = new io.swagger.models.Response();
+        if (Objects.nonNull(response)) {
+            responseExample = responseExample.example("response", response.andReturn().body().asString());
+        }
+        operation.addResponse(valueOf(response.statusCode()), responseExample);
 
         Swagger swagger = new Swagger()
                 .scheme(forValue(URI.create(requestSpec.getURI()).getScheme()))
